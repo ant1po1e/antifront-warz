@@ -35,6 +35,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""1427d5b9-2101-4f1f-bbfb-76c92b82e1d5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -103,6 +112,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9fa9863d-81a7-44e1-bc4d-b70e654ca0fb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36646449-d5e9-43df-a8fb-d1ebef611767"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -112,6 +143,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // PlayerInputSystem
         m_PlayerInputSystem = asset.FindActionMap("PlayerInputSystem", throwIfNotFound: true);
         m_PlayerInputSystem_Movement = m_PlayerInputSystem.FindAction("Movement", throwIfNotFound: true);
+        m_PlayerInputSystem_Select = m_PlayerInputSystem.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -174,11 +206,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerInputSystem;
     private List<IPlayerInputSystemActions> m_PlayerInputSystemActionsCallbackInterfaces = new List<IPlayerInputSystemActions>();
     private readonly InputAction m_PlayerInputSystem_Movement;
+    private readonly InputAction m_PlayerInputSystem_Select;
     public struct PlayerInputSystemActions
     {
         private @PlayerControls m_Wrapper;
         public PlayerInputSystemActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_PlayerInputSystem_Movement;
+        public InputAction @Select => m_Wrapper.m_PlayerInputSystem_Select;
         public InputActionMap Get() { return m_Wrapper.m_PlayerInputSystem; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -191,6 +225,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
         }
 
         private void UnregisterCallbacks(IPlayerInputSystemActions instance)
@@ -198,6 +235,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
         }
 
         public void RemoveCallbacks(IPlayerInputSystemActions instance)
@@ -218,5 +258,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerInputSystemActions
     {
         void OnMovement(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

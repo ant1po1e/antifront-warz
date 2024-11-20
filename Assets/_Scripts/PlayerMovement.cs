@@ -8,14 +8,11 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private float speed;
     public float walkSpeed = 8f;
-    public float runSpeed = 15f;
 
     private Vector2 inputVector = Vector2.zero;
 
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity = 0.1f;
-    
-    [SerializeField] private int playerIndex = 0;
     
 
     void Start() {
@@ -25,12 +22,8 @@ public class PlayerMovement : MonoBehaviour
         speed = walkSpeed;
     }
 
-    public int GetPlayerIndex()
+    void Update() 
     {
-        return playerIndex;
-    }
-
-    void Update() {
         Vector3 direction = new Vector3(inputVector.x, 0f, inputVector.y).normalized;
 
         if (direction.magnitude >= 0.1f)
