@@ -1,14 +1,16 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using System.Linq; 
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerConfiguration playerConfig;
-    private PlayerMovement playerMovement;
+    private PlayerController playerController;
+
+    private GunController gun;
 
     [SerializeField] private MeshRenderer playerMesh;
     
@@ -16,27 +18,44 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Awake() 
     {
-        playerMovement = GetComponent<PlayerMovement>();
+        playerController = GetComponent<PlayerController>();
+        
+        gun = GetComponent<GunController>();
         controls = new PlayerControls();
     }
 
     public void InitializePlayer(PlayerConfiguration pc)
     {
         playerConfig = pc;
-        playerMesh.material = pc.PlayerMat;
+        playerMesh.material = pc.playerMaterial;
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+
+        playerConfig.Input.onActionTriggered += Input_onShootTriggered;
     }
 
     private void Input_onActionTriggered(CallbackContext ctx)
     {
-        if (ctx.action.name == controls.PlayerInputSystem.Movement.name)
+        if (ctx.action.name == controls.PlayerMovement.Movement.name)
         {
             OnMove(ctx);
         }
     }
 
+    private void Input_onShootTriggered(CallbackContext ctx)
+    {
+        if (ctx.action.name == controls.PlayerMovement.Shoot.name)
+        {
+            OnShoot();
+        }
+    }
+
     public void OnMove(CallbackContext ctx)
     {
-        playerMovement.SetInputVector(ctx.ReadValue<Vector2>());
+        playerController.SetInputVector(ctx.ReadValue<Vector2>());
+    }
+
+    public void OnShoot()
+    {
+        gun.Shoot();
     }
 }

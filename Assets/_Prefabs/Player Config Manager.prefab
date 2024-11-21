@@ -42,10 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3923891545346328393}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017fc1c532be5bf45966efabd7334391, type: 3}
+  m_Script: {fileID: 11500000, guid: 1192ca066692a684fb8558f234d05fd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxPlayer: 2
+  MaxPlayers: 2
 --- !u!114 &6631320576046983208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,8 +66,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9195248751662803504}
-        m_TargetAssemblyTypeName: PlayerConfigManager, Assembly-CSharp
-        m_MethodName: PlayerJoinHandler
+        m_TargetAssemblyTypeName: PlayerConfigurationManager, Assembly-CSharp
+        m_MethodName: HandlePlayerJoin
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

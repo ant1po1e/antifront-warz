@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4786997133504982988}
   - component: {fileID: 220166426227123997}
-  - component: {fileID: 1063436796359788282}
+  - component: {fileID: -294579210541215765}
   m_Layer: 0
   m_Name: PlayerInput
   m_TagString: Untagged
@@ -57,14 +57,26 @@ MonoBehaviour:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1063436796359788282}
+      - m_Target: {fileID: -294579210541215765}
         m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
-        m_MethodName: OnMove
-        m_Mode: 0
+        m_MethodName: OnShoot
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -75,12 +87,48 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 264405a3-8f03-4c69-aa74-ac1ff8c7d74e
     m_ActionName: PlayerInputSystem/New action[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1427d5b9-2101-4f1f-bbfb-76c92b82e1d5
+    m_ActionName: PlayerInputSystem/Select[/XInputControllerWindows/buttonSouth,/Keyboard/enter]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -294579210541215765}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnSprint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b68d2aed-8f97-48b1-97fd-0868d75b8898
+    m_ActionName: PlayerMovement/Sprint[/XInputControllerWindows/rightTrigger,/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -294579210541215765}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae009507-692a-4a19-b47c-36b6e45b6172
+    m_ActionName: PlayerMovement/Shoot[/XInputControllerWindows/buttonEast,/Keyboard/k]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: PlayerInputSystem
+  m_DefaultActionMap: PlayerMovement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1063436796359788282
+--- !u!114 &-294579210541215765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,3 +140,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1098246d4f824c4783e9863740e808a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMesh: {fileID: 4155994230880752688, guid: 3790ba2d452128f4192c03ef10d5e63c,
+    type: 3}

@@ -158,7 +158,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3678760272222218899}
         m_TargetAssemblyTypeName: PlayerSetupMenuController, Assembly-CSharp
-        m_MethodName: SetColor
+        m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2100000, guid: d88e3da0b26b476438ce43b5a8156bfb,
@@ -218,12 +218,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753650418649427670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b952914004c1314c9798a79eccece82, type: 3}
+  m_Script: {fileID: 11500000, guid: 45e15cd4cf01fc441b78fa6b7d1c9e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   titleText: {fileID: 5390177725472078736}
   readyPanel: {fileID: 510534689501228269}
-  colorSelectPanel: {fileID: 8165209538344216205}
+  menuPanel: {fileID: 8165209538344216205}
   readyButton: {fileID: 896826290745622583}
 --- !u!1 &2587996616911449117
 GameObject:
@@ -347,7 +347,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3678760272222218899}
         m_TargetAssemblyTypeName: PlayerSetupMenuController, Assembly-CSharp
-        m_MethodName: SetColor
+        m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2100000, guid: 21093dab20540a04bbdb95f0fb8bb219,
@@ -625,7 +625,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3678760272222218899}
         m_TargetAssemblyTypeName: PlayerSetupMenuController, Assembly-CSharp
-        m_MethodName: SetColor
+        m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2100000, guid: b81db7b3927f3e042ba76a2d50c86419,
@@ -978,7 +978,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3678760272222218899}
         m_TargetAssemblyTypeName: PlayerSetupMenuController, Assembly-CSharp
-        m_MethodName: SetColor
+        m_MethodName: SelectColor
         m_Mode: 2
         m_Arguments:
           m_ObjectArgument: {fileID: 2100000, guid: 1190ef82e0c955f4f98d91b0c02294a9,
