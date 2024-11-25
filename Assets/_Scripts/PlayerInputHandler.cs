@@ -29,8 +29,8 @@ public class PlayerInputHandler : MonoBehaviour
         playerConfig = pc;
         playerMesh.material = pc.playerMaterial;
         playerConfig.Input.onActionTriggered += Input_onActionTriggered;
-
         playerConfig.Input.onActionTriggered += Input_onShootTriggered;
+        playerConfig.Input.onActionTriggered += Input_onSprintTriggered;
     }
 
     private void Input_onActionTriggered(CallbackContext ctx)
@@ -49,6 +49,14 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
+    private void Input_onSprintTriggered(CallbackContext ctx)
+    {
+        if (ctx.action.name == controls.PlayerMovement.Sprint.name)
+        {
+            OnSprint(ctx);
+        }
+    }
+
     public void OnMove(CallbackContext ctx)
     {
         playerController.SetInputVector(ctx.ReadValue<Vector2>());
@@ -57,5 +65,16 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnShoot()
     {
         gun.Shoot();
+    }
+
+    public void OnSprint(CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            playerController.Sprint();
+        }else if (ctx.canceled)
+        {
+            playerController.Walk();
+        }
     }
 }

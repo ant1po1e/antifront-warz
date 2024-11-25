@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public float walkSpeed = 8f;
     public float runSpeed = 12f;
 
+    public bool isRunning;
+
     private Vector2 inputVector = Vector2.zero;
 
     public float turnSmoothTime = 0.1f;
@@ -54,5 +56,10 @@ public class PlayerController : MonoBehaviour
     public void Sprint()
     {
         speed = runSpeed;
+    }
+
+    public void Walk()
+    {
+        speed = walkSpeed;
     }
 }
