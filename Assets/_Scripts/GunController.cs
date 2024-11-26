@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GunController : MonoBehaviour
@@ -9,6 +10,8 @@ public class GunController : MonoBehaviour
     public float bulletSpeed = 20f; 
     public float fireRate = 0.5f;   
 
+    [SerializeField] ParticleSystem gunshotFX;
+
     private float nextFireTime = 0f;
 
 
@@ -16,6 +19,8 @@ public class GunController : MonoBehaviour
     {
         if (Time.time >= nextFireTime)
         {
+            gunshotFX.Play();
+            
             var bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
             bullet.GetComponent<Rigidbody>().velocity = shootPoint.forward * bulletSpeed;
 

@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int setHealth = 3;
     [SerializeField] private int currentHealth;
+    [SerializeField] private ParticleSystem[] bloodFX;
 
     private GameObject deadPanel;
 
@@ -24,16 +25,47 @@ public class PlayerHealth : MonoBehaviour
     {
         if (this.currentHealth <= 0)
         {
-            deadPanel.SetActive(true);
             PlayerController playerController = gameObject.GetComponent<PlayerController>();
             playerController.enabled = false;
-            Time.timeScale = 0f;
-            Debug.Log("Dead");
+            StartCoroutine(PauseDelay());
         }
+    }
+
+    private IEnumerator PauseDelay()
+    {
+        yield return new WaitForSeconds(1f);
+        deadPanel.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     public void SubtractHealth()
     {
         currentHealth -= 1;
+
+        PlayRandomBloodFX();
+    }
+
+    private void PlayRandomBloodFX()
+    {
+        if (bloodFX.Length == 0) return; 
+
+        int randomIndex = Random.Range(0, bloodFX.Length);
+        ParticleSystem selectedFX = bloodFX[randomIndex];
+
+        if (selectedFX != null)
+        {
+            selectedFX.Play();
+
+            StartCoroutine(StopParticleAfterPlay(selectedFX));
+        }
+    }
+
+    private IEnumerator StopParticleAfterPlay(ParticleSystem particle)
+    {
+        yield return new WaitForSeconds(particle.main.duration);
+
+        yield return new WaitUntil(() => !particle.IsAlive());
+
+        particle.Stop();
     }
 }
