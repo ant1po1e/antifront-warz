@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerConfigurationManager : MonoBehaviour
 {
     private List<PlayerConfiguration> playerConfigs;
-    [SerializeField]
-    private int MaxPlayers = 2;
+
+    [SerializeField] private int MaxPlayers = 2;
 
     public static PlayerConfigurationManager Instance { get; private set; }
 
@@ -30,13 +30,13 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-        Debug.Log("player joined " + pi.playerIndex);
-        pi.transform.SetParent(transform);
+            Debug.Log("player joined " + pi.playerIndex);
+            pi.transform.SetParent(transform);
 
-        if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
-        {
-            playerConfigs.Add(new PlayerConfiguration(pi));
-        }
+            if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+            {
+                playerConfigs.Add(new PlayerConfiguration(pi));
+            }
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
