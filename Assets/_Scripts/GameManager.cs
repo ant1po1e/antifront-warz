@@ -1,27 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using static UnityEngine.InputSystem.InputAction;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public GameObject deadPanel;
+    public GameObject pausePanel;
+
+    private PlayerControls controls;
+
+    private bool isPaused = false;
+
     private void Awake()
     {
-        if(Instance != null)
+        if (Instance != null)
         {
-            Debug.Log("[Singleton] Trying to instantiate a seccond instance of a singleton class.");
+            Debug.LogWarning("[Singleton] Trying to instantiate a second instance of a singleton class.");
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        controls = new PlayerControls();
+    }
+
+    private void OnEnable()
+    {
+        controls.Menu.Pause.performed += Pause;
+        controls.Enable();
+    }
+
+    private void OnDisable()
+    {
+        controls.Menu.Pause.performed -= Pause;
+        controls.Disable();
+    }
+
+    private void Start()
+    {
+        pausePanel.SetActive(false);
+        deadPanel.SetActive(false);
+    }
+
+    private void Pause(CallbackContext ctx)
+    {
+        isPaused = !isPaused;
+        pausePanel.SetActive(isPaused);
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
         }
         else
         {
-            Instance = this;
+            Time.timeScale = 1f;
         }
-        
     }
-
-
-    public GameObject deadPanel;
 
     public void Rematch()
     {
@@ -36,7 +73,7 @@ public class GameManager : MonoBehaviour
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjects)
         {
-            if (obj.CompareTag("DontDestroy")) 
+            if (obj.CompareTag("DontDestroy"))
             {
                 Destroy(obj);
             }

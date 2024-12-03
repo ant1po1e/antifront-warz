@@ -8,6 +8,9 @@ using UnityEngine.SceneManagement;
 public class PlayerConfigurationManager : MonoBehaviour
 {
     private List<PlayerConfiguration> playerConfigs;
+    private string mapName = "One";
+
+    public GameObject alertText;
 
     [SerializeField] private int MaxPlayers = 2;
 
@@ -30,13 +33,15 @@ public class PlayerConfigurationManager : MonoBehaviour
 
     public void HandlePlayerJoin(PlayerInput pi)
     {
-            Debug.Log("player joined " + pi.playerIndex);
-            pi.transform.SetParent(transform);
+        Debug.Log("player joined " + pi.playerIndex);
+        pi.transform.SetParent(transform);
+        alertText.SetActive(false);
 
-            if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
-            {
-                playerConfigs.Add(new PlayerConfiguration(pi));
-            }
+
+        if(!playerConfigs.Any(p => p.PlayerIndex == pi.playerIndex))
+        {
+            playerConfigs.Add(new PlayerConfiguration(pi));
+        }
     }
 
     public List<PlayerConfiguration> GetPlayerConfigs()
@@ -54,8 +59,14 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].isReady = true;
         if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.isReady == true))
         {
-            SceneManager.LoadScene("Sample");
+            SceneManager.LoadScene(mapName);
         }
+    }
+
+    public void SelectMap(string name)
+    {
+        mapName = name;
+        Debug.Log(mapName);
     }
 }
 
