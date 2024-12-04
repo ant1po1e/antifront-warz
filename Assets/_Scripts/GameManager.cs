@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject deadPanel;
     public GameObject pausePanel;
+    public Button continueButton;
+    public Button rematchButton;
+    
+    public bool isDead;
 
     private PlayerControls controls;
 
@@ -47,16 +53,20 @@ public class GameManager : MonoBehaviour
 
     private void Pause(CallbackContext ctx)
     {
-        isPaused = !isPaused;
-        pausePanel.SetActive(isPaused);
+        if (isDead != true)
+        {
+            isPaused = !isPaused;
+            pausePanel.SetActive(isPaused);
 
-        if (isPaused)
-        {
-            Time.timeScale = 0f;
-        }
-        else
-        {
-            Time.timeScale = 1f;
+            if (isPaused)
+            {
+                continueButton.Select();
+                Time.timeScale = 0f;
+            }
+            else
+            {
+                Time.timeScale = 1f;
+            }
         }
     }
 

@@ -22,7 +22,6 @@ public class MainMenu : MonoBehaviour
     {
         controls.Menu.Quit.performed += QuitGame;
         controls.Menu.MapSelect.performed += MapSelect;
-        mapButton.Select();
         controls.Enable();
     }
 
@@ -45,6 +44,7 @@ public class MainMenu : MonoBehaviour
             bool isActive = mapSelectPanel.activeSelf; 
             mapSelectPanel.SetActive(!isActive); 
             mainLayout.SetActive(isActive);
+            mapButton.Select();
         }
     }
 

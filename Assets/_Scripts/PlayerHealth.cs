@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -9,10 +11,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private ParticleSystem[] bloodFX;
 
     private GameObject deadPanel;
+    private Button rematchButton;
 
     private void Awake() 
     {    
         deadPanel = GameManager.Instance.deadPanel;
+        rematchButton = GameManager.Instance.rematchButton;
     }
 
     void Start()
@@ -28,12 +32,13 @@ public class PlayerHealth : MonoBehaviour
             PlayerController playerController = gameObject.GetComponent<PlayerController>();
             playerController.enabled = false;
             StartCoroutine(PauseDelay());
+            GameManager.Instance.isDead = true;
         }
     }
 
     private IEnumerator PauseDelay()
     {
-        Cursor.lockState = CursorLockMode.None;
+        rematchButton.Select();
         yield return new WaitForSeconds(1f);
         deadPanel.SetActive(true);
         Time.timeScale = 0f;
