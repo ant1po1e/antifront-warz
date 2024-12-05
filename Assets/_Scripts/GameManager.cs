@@ -76,6 +76,12 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void Continue()
+    {
+        Time.timeScale = 1f;
+        isPaused = !isPaused;
+    }
+
     public void MainMenu()
     {
         Time.timeScale = 1f;

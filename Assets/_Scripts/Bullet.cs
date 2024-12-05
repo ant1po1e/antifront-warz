@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
         {
             PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
             playerHealth.SubtractHealth();
+            Destroy(this.gameObject);
         }
     }
 }

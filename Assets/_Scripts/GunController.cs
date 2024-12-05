@@ -24,7 +24,7 @@ public class GunController : MonoBehaviour
             var bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
             bullet.GetComponent<Rigidbody>().velocity = shootPoint.forward * bulletSpeed;
 
-            Destroy(bullet, 5f);
+            Destroy(bullet, 3f);
 
             nextFireTime = Time.time + fireRate;
         }

@@ -13,6 +13,8 @@ public class PlayerHealth : MonoBehaviour
     private GameObject deadPanel;
     private Button rematchButton;
 
+    private bool isCoroutineRunning = false;
+
     private void Awake() 
     {    
         deadPanel = GameManager.Instance.deadPanel;
@@ -27,11 +29,13 @@ public class PlayerHealth : MonoBehaviour
 
     void Update()
     {
-        if (this.currentHealth <= 0)
+        if (this.currentHealth <= 0 && !isCoroutineRunning)
         {
+            isCoroutineRunning = true; 
             PlayerController playerController = gameObject.GetComponent<PlayerController>();
             playerController.enabled = false;
             StartCoroutine(PauseDelay());
+
             GameManager.Instance.isDead = true;
         }
     }
