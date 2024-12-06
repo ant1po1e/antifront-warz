@@ -59,14 +59,20 @@ public class PlayerConfigurationManager : MonoBehaviour
         playerConfigs[index].isReady = true;
         if (playerConfigs.Count == MaxPlayers && playerConfigs.All(p => p.isReady == true))
         {
-            SceneManager.LoadScene(mapName);
+            StartCoroutine(LoadScene());
         }
+    }
+
+    private IEnumerator LoadScene()
+    {
+        MainMenu.Instance.animator.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(mapName);
     }
 
     public void SelectMap(string name)
     {
         mapName = name;
-        Debug.Log(mapName);
     }
 }
 

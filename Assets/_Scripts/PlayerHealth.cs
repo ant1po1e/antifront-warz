@@ -13,6 +13,10 @@ public class PlayerHealth : MonoBehaviour
     private GameObject deadPanel;
     private Button rematchButton;
 
+    private PlayerController playerController;
+
+    public Material playerMat;
+
     private bool isCoroutineRunning = false;
 
     private void Awake() 
@@ -25,6 +29,10 @@ public class PlayerHealth : MonoBehaviour
     {
         deadPanel.SetActive(false);
         currentHealth = setHealth;
+
+        Renderer renderer = GetComponentInChildren<Renderer>();
+        playerController = gameObject.GetComponent<PlayerController>();
+        playerMat = renderer.material;
     }
 
     void Update()
@@ -32,12 +40,18 @@ public class PlayerHealth : MonoBehaviour
         if (this.currentHealth <= 0 && !isCoroutineRunning)
         {
             isCoroutineRunning = true; 
-            PlayerController playerController = gameObject.GetComponent<PlayerController>();
+            
             playerController.enabled = false;
             StartCoroutine(PauseDelay());
 
             GameManager.Instance.isDead = true;
         }
+
+        if (playerController.enabled == true)
+    {
+        string cleanMaterialName = playerMat.name.Replace(" (Instance)", ""); 
+        GameManager.Instance.SetWinnerText(cleanMaterialName);
+    }
     }
 
     private IEnumerator PauseDelay()

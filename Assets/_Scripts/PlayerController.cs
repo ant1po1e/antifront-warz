@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,7 +22,8 @@ public class PlayerController : MonoBehaviour
     private float verticalVelocity = 0f;
     
 
-    void Start() {
+    void Start() 
+    {
         controller = GetComponent<CharacterController>();
 
         Cursor.lockState = CursorLockMode.Locked;

@@ -6,15 +6,27 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class MainMenu : MonoBehaviour
 {
+    public static MainMenu Instance { get; private set; }
+
     private PlayerControls controls;
 
     public GameObject mapSelectPanel;
     public GameObject mainLayout;
 
+    public Animator animator;
+
     public Button mapButton;
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Debug.LogWarning("[Singleton] Trying to instantiate a second instance of a singleton class.");
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
         controls = new PlayerControls();
     }
 
@@ -56,7 +68,7 @@ public class MainMenu : MonoBehaviour
 
     private void QuitGame(CallbackContext ctx)
     {
-        Debug.Log("Quit");
+        animator.SetTrigger("Start");
         Application.Quit();
     }
 }

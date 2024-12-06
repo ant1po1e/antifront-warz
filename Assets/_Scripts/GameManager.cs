@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
 using TMPro;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
     public GameObject pausePanel;
     public Button continueButton;
     public Button rematchButton;
+
+    public TMP_Text winnerText;
+
+    public Animator animator;
     
     public bool isDead;
 
@@ -49,6 +54,9 @@ public class GameManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         deadPanel.SetActive(false);
+
+        Time.timeScale = 0f;
+        StartCoroutine(Countdown());
     }
 
     private void Pause(CallbackContext ctx)
@@ -68,6 +76,11 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
+    }
+
+    public void SetWinnerText(string text)
+    {
+        winnerText.text = "Player " + text + " Wins!";
     }
 
     public void Rematch()
@@ -95,6 +108,19 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        StartCoroutine(LoadMainMenu());
+    }
+
+    private IEnumerator LoadMainMenu()
+    {
+        animator.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Main Menu");
+    }
+
+    private IEnumerator Countdown()
+    {
+        yield return new WaitForSecondsRealtime(4);
+        Time.timeScale = 1f;
     }
 }
