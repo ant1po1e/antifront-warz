@@ -16,10 +16,23 @@ public class PlayerSetupMenuController : MonoBehaviour
     private GameObject menuPanel;
     [SerializeField]
     private Button readyButton;
+    [SerializeField]
+    private Button[] colorButtons; 
+    [SerializeField]
+    private GameObject colorTakenText;
+
+    private Coroutine currentCoroutine;
+
 
     private float ignoreInputTime = 1.5f;
     private bool inputEnabled;
-    public void setPlayerIndex(int pi)
+
+    private void Start() 
+    {
+        colorTakenText.SetActive(false);    
+    }
+
+    public void SetPlayerIndex(int pi)
     {
         playerIndex = pi;
         titleText.SetText("Player " + (pi + 1).ToString());
@@ -38,12 +51,41 @@ public class PlayerSetupMenuController : MonoBehaviour
     {
         if(!inputEnabled) { return; }
 
-        PlayerConfigurationManager.Instance.SetPlayerColor(playerIndex, mat);
-        readyPanel.SetActive(true);
-        readyButton.interactable = true;
-        menuPanel.SetActive(false);
-        readyButton.Select();
-        
+        if (PlayerConfigurationManager.Instance.IsColorAvailable(mat))
+        {
+            PlayerConfigurationManager.Instance.SetPlayerColor(playerIndex, mat);
+            UpdateColorButtons();
+            readyPanel.SetActive(true);
+            readyButton.interactable = true;
+            menuPanel.SetActive(false);
+            readyButton.Select();
+        }
+        else
+        {
+            if (currentCoroutine != null)
+            {
+                StopCoroutine(currentCoroutine);
+            }
+
+            
+            currentCoroutine = StartCoroutine(EnableText());
+        }
+    }
+
+    private void UpdateColorButtons()
+    {
+        foreach (Button button in colorButtons)
+        {
+            var buttonImage = button.GetComponent<Image>();
+            button.interactable = PlayerConfigurationManager.Instance.IsColorAvailable(buttonImage.material);
+        }
+    }
+
+    private IEnumerator EnableText()
+    {
+        colorTakenText.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        colorTakenText.SetActive(false);
     }
 
     public void ReadyPlayer()

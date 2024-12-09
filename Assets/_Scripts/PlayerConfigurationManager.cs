@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerConfigurationManager : MonoBehaviour
 {
     private List<PlayerConfiguration> playerConfigs;
+    private List<Material> usedColors = new List<Material>();
     private string mapName = "One";
 
     public GameObject alertText;
@@ -44,6 +45,11 @@ public class PlayerConfigurationManager : MonoBehaviour
         }
     }
 
+    public bool IsColorAvailable(Material color)
+    {
+        return !usedColors.Contains(color); 
+    }
+
     public List<PlayerConfiguration> GetPlayerConfigs()
     {
         return playerConfigs;
@@ -52,6 +58,7 @@ public class PlayerConfigurationManager : MonoBehaviour
     public void SetPlayerColor(int index, Material color)
     {
         playerConfigs[index].playerMaterial = color;
+        usedColors.Add(color); 
     }
 
     public void ReadyPlayer(int index)

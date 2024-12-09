@@ -48,10 +48,10 @@ public class PlayerHealth : MonoBehaviour
         }
 
         if (playerController.enabled == true)
-    {
-        string cleanMaterialName = playerMat.name.Replace(" (Instance)", ""); 
-        GameManager.Instance.SetWinnerText(cleanMaterialName);
-    }
+        {
+            string cleanMaterialName = playerMat.name.Replace(" (Instance)", ""); 
+            GameManager.Instance.SetWinnerText(cleanMaterialName);
+        }
     }
 
     private IEnumerator PauseDelay()
