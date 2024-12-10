@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     private PlayerControls controls;
 
     public GameObject mapSelectPanel;
+    public GameObject creditsPanel;
     public GameObject mainLayout;
 
     public Animator animator;
@@ -34,19 +35,23 @@ public class MainMenu : MonoBehaviour
     {
         controls.Menu.Quit.performed += QuitGame;
         controls.Menu.MapSelect.performed += MapSelect;
+        controls.Menu.Credits.performed += Credits;
         controls.Enable();
     }
 
     private void OnDisable()
     {
         controls.Menu.Quit.performed -= QuitGame;
-        controls.Menu.MapSelect.performed += MapSelect;
+        controls.Menu.MapSelect.performed -= MapSelect;
+        controls.Menu.Credits.performed -= Credits;
         controls.Disable();
     }
 
     private void Start()
     {
         mapSelectPanel.SetActive(false);
+        creditsPanel.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void MapSelect(CallbackContext ctx)
@@ -55,6 +60,19 @@ public class MainMenu : MonoBehaviour
         {
             bool isActive = mapSelectPanel.activeSelf; 
             mapSelectPanel.SetActive(!isActive); 
+            creditsPanel.SetActive(false);
+            mainLayout.SetActive(isActive);
+            mapButton.Select();
+        }
+    }
+
+    private void Credits(CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            bool isActive = creditsPanel.activeSelf; 
+            creditsPanel.SetActive(!isActive); 
+            mapSelectPanel.SetActive(false); 
             mainLayout.SetActive(isActive);
             mapButton.Select();
         }

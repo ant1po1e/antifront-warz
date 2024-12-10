@@ -207,6 +207,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Credits",
+                    "type": "Button",
+                    "id": "f7a5037c-7b96-40ca-a827-db42ec3b078b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -273,6 +282,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MapSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c9ef5d1-8b86-4384-9639-a2275ee8cb24",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Credits",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
