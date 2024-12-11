@@ -20,6 +20,7 @@ public class GunController : MonoBehaviour
         if (Time.time >= nextFireTime)
         {
             gunshotFX.Play();
+            AudioManager.instance.PlaySFX("gunshot");
             
             var bullet = Instantiate(bulletPrefab, shootPoint.position, shootPoint.rotation);
             bullet.GetComponent<Rigidbody>().velocity = shootPoint.forward * bulletSpeed;

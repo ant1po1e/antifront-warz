@@ -10,13 +10,19 @@ public class MainMenu : MonoBehaviour
 
     private PlayerControls controls;
 
-    public GameObject mapSelectPanel;
-    public GameObject creditsPanel;
-    public GameObject mainLayout;
+    [SerializeField] private GameObject mapSelectPanel;
+    [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject mainLayout;
+
+    [Space]
 
     public Animator animator;
 
     public Button mapButton;
+    public Slider musicSlider;
+
+    private bool isOptionActive = true;
 
     private void Awake()
     {
@@ -36,6 +42,7 @@ public class MainMenu : MonoBehaviour
         controls.Menu.Quit.performed += QuitGame;
         controls.Menu.MapSelect.performed += MapSelect;
         controls.Menu.Credits.performed += Credits;
+        controls.Menu.Options.performed += Options;
         controls.Enable();
     }
 
@@ -44,6 +51,7 @@ public class MainMenu : MonoBehaviour
         controls.Menu.Quit.performed -= QuitGame;
         controls.Menu.MapSelect.performed -= MapSelect;
         controls.Menu.Credits.performed -= Credits;
+        controls.Menu.Options.performed -= Options;
         controls.Disable();
     }
 
@@ -51,6 +59,7 @@ public class MainMenu : MonoBehaviour
     {
         mapSelectPanel.SetActive(false);
         creditsPanel.SetActive(false);
+        optionsPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -68,13 +77,25 @@ public class MainMenu : MonoBehaviour
 
     private void Credits(CallbackContext ctx)
     {
+        if (!isOptionActive)
+        {
+            if (ctx.performed)
+            {
+                bool isActive = creditsPanel.activeSelf; 
+                creditsPanel.SetActive(!isActive); 
+            }
+        }
+    }
+
+    private void Options(CallbackContext ctx)
+    {
         if (ctx.performed)
         {
-            bool isActive = creditsPanel.activeSelf; 
-            creditsPanel.SetActive(!isActive); 
+            isOptionActive = optionsPanel.activeSelf; 
+            optionsPanel.SetActive(!isOptionActive); 
             mapSelectPanel.SetActive(false); 
-            mainLayout.SetActive(isActive);
-            mapButton.Select();
+            mainLayout.SetActive(isOptionActive);
+            musicSlider.Select();
         }
     }
 

@@ -238,6 +238,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Options"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9517173-9520-467a-a1d3-5bcd06412987"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -310,11 +319,22 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0c9ef5d1-8b86-4384-9639-a2275ee8cb24"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Credits"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cef36a81-a5b1-4736-ad9d-cb2a2ec526bd"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Options"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -335,6 +355,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Menu_Quit = m_Menu.FindAction("Quit", throwIfNotFound: true);
         m_Menu_MapSelect = m_Menu.FindAction("MapSelect", throwIfNotFound: true);
         m_Menu_Credits = m_Menu.FindAction("Credits", throwIfNotFound: true);
+        m_Menu_Options = m_Menu.FindAction("Options", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -470,6 +491,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_Quit;
     private readonly InputAction m_Menu_MapSelect;
     private readonly InputAction m_Menu_Credits;
+    private readonly InputAction m_Menu_Options;
     public struct MenuActions
     {
         private @PlayerControls m_Wrapper;
@@ -478,6 +500,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Quit => m_Wrapper.m_Menu_Quit;
         public InputAction @MapSelect => m_Wrapper.m_Menu_MapSelect;
         public InputAction @Credits => m_Wrapper.m_Menu_Credits;
+        public InputAction @Options => m_Wrapper.m_Menu_Options;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -499,6 +522,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Credits.started += instance.OnCredits;
             @Credits.performed += instance.OnCredits;
             @Credits.canceled += instance.OnCredits;
+            @Options.started += instance.OnOptions;
+            @Options.performed += instance.OnOptions;
+            @Options.canceled += instance.OnOptions;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -515,6 +541,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Credits.started -= instance.OnCredits;
             @Credits.performed -= instance.OnCredits;
             @Credits.canceled -= instance.OnCredits;
+            @Options.started -= instance.OnOptions;
+            @Options.performed -= instance.OnOptions;
+            @Options.canceled -= instance.OnOptions;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -545,5 +574,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnQuit(InputAction.CallbackContext context);
         void OnMapSelect(InputAction.CallbackContext context);
         void OnCredits(InputAction.CallbackContext context);
+        void OnOptions(InputAction.CallbackContext context);
     }
 }

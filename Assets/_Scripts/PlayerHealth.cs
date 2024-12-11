@@ -6,7 +6,7 @@ using TMPro;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int setHealth = 3;
+    [SerializeField] private int setHealth = 5;
     [SerializeField] private int currentHealth;
     [SerializeField] private ParticleSystem[] bloodFX;
 
