@@ -209,6 +209,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Options",
+                    "type": "Button",
+                    "id": "a9517173-9520-467a-a1d3-5bcd06412987",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Credits",
                     "type": "Button",
                     "id": "f7a5037c-7b96-40ca-a827-db42ec3b078b",
@@ -218,9 +227,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Options",
+                    "name": "Tutorial",
                     "type": "Button",
-                    "id": "a9517173-9520-467a-a1d3-5bcd06412987",
+                    "id": "88f419e3-b909-4739-8143-4d83439cd1c6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -302,6 +311,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Credits",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb68a480-8f6f-4fde-a6be-18f4655069d4",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Tutorial",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

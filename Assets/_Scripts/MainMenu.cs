@@ -11,8 +11,9 @@ public class MainMenu : MonoBehaviour
     private PlayerControls controls;
 
     [SerializeField] private GameObject mapSelectPanel;
-    [SerializeField] private GameObject creditsPanel;
     [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private GameObject creditsPanel;
+    [SerializeField] private GameObject tutorialPanel;
     [SerializeField] private GameObject mainLayout;
 
     [Space]
@@ -41,8 +42,9 @@ public class MainMenu : MonoBehaviour
     {
         controls.Menu.Quit.performed += QuitGame;
         controls.Menu.MapSelect.performed += MapSelect;
-        controls.Menu.Credits.performed += Credits;
         controls.Menu.Options.performed += Options;
+        controls.Menu.Credits.performed += Credits;
+        controls.Menu.Tutorial.performed += Tutorial;
         controls.Enable();
     }
 
@@ -50,8 +52,9 @@ public class MainMenu : MonoBehaviour
     {
         controls.Menu.Quit.performed -= QuitGame;
         controls.Menu.MapSelect.performed -= MapSelect;
-        controls.Menu.Credits.performed -= Credits;
         controls.Menu.Options.performed -= Options;
+        controls.Menu.Credits.performed -= Credits;
+        controls.Menu.Tutorial.performed -= Tutorial;
         controls.Disable();
     }
 
@@ -61,6 +64,15 @@ public class MainMenu : MonoBehaviour
         creditsPanel.SetActive(false);
         optionsPanel.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update() 
+    {
+        if (isOptionActive == true)
+        {   
+            creditsPanel.SetActive(false);
+            tutorialPanel.SetActive(false);
+        }    
     }
 
     private void MapSelect(CallbackContext ctx)
@@ -75,18 +87,6 @@ public class MainMenu : MonoBehaviour
         }
     }
 
-    private void Credits(CallbackContext ctx)
-    {
-        if (!isOptionActive)
-        {
-            if (ctx.performed)
-            {
-                bool isActive = creditsPanel.activeSelf; 
-                creditsPanel.SetActive(!isActive); 
-            }
-        }
-    }
-
     private void Options(CallbackContext ctx)
     {
         if (ctx.performed)
@@ -96,6 +96,32 @@ public class MainMenu : MonoBehaviour
             mapSelectPanel.SetActive(false); 
             mainLayout.SetActive(isOptionActive);
             musicSlider.Select();
+        }
+    }
+
+    private void Credits(CallbackContext ctx)
+    {
+        if (!isOptionActive)
+        {
+            if (ctx.performed)
+            {
+                bool isActive = creditsPanel.activeSelf; 
+                creditsPanel.SetActive(!isActive); 
+                tutorialPanel.SetActive(false);
+            } 
+        }
+    }
+
+    private void Tutorial(CallbackContext ctx)
+    {
+        if (!isOptionActive)
+        {
+            if (ctx.performed)
+            {
+                bool isActive = tutorialPanel.activeSelf;
+                tutorialPanel.SetActive(!isActive);
+                creditsPanel.SetActive(false); 
+            }
         }
     }
 
