@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour
     public void Rematch()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        StartCoroutine(ReloadScene());
+        
     }
 
     public void Continue()
@@ -116,6 +117,13 @@ public class GameManager : MonoBehaviour
         animator.SetTrigger("Start");
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Main Menu");
+    }
+
+    private IEnumerator ReloadScene()
+    {
+        animator.SetTrigger("Start");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private IEnumerator Countdown()

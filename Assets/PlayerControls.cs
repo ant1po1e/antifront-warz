@@ -256,6 +256,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GameEnter"",
+                    ""type"": ""Button"",
+                    ""id"": ""8be96661-9de8-42e8-8d5f-45b02f24b9ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -357,6 +366,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Options"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a08bbc90-1466-4a1e-ae77-2fc11e7d25ba"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GameEnter"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -377,6 +397,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Menu_Options = m_Menu.FindAction("Options", throwIfNotFound: true);
         m_Menu_Credits = m_Menu.FindAction("Credits", throwIfNotFound: true);
         m_Menu_Tutorial = m_Menu.FindAction("Tutorial", throwIfNotFound: true);
+        m_Menu_GameEnter = m_Menu.FindAction("GameEnter", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -514,6 +535,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Menu_Options;
     private readonly InputAction m_Menu_Credits;
     private readonly InputAction m_Menu_Tutorial;
+    private readonly InputAction m_Menu_GameEnter;
     public struct MenuActions
     {
         private @PlayerControls m_Wrapper;
@@ -524,6 +546,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Options => m_Wrapper.m_Menu_Options;
         public InputAction @Credits => m_Wrapper.m_Menu_Credits;
         public InputAction @Tutorial => m_Wrapper.m_Menu_Tutorial;
+        public InputAction @GameEnter => m_Wrapper.m_Menu_GameEnter;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -551,6 +574,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Tutorial.started += instance.OnTutorial;
             @Tutorial.performed += instance.OnTutorial;
             @Tutorial.canceled += instance.OnTutorial;
+            @GameEnter.started += instance.OnGameEnter;
+            @GameEnter.performed += instance.OnGameEnter;
+            @GameEnter.canceled += instance.OnGameEnter;
         }
 
         private void UnregisterCallbacks(IMenuActions instance)
@@ -573,6 +599,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Tutorial.started -= instance.OnTutorial;
             @Tutorial.performed -= instance.OnTutorial;
             @Tutorial.canceled -= instance.OnTutorial;
+            @GameEnter.started -= instance.OnGameEnter;
+            @GameEnter.performed -= instance.OnGameEnter;
+            @GameEnter.canceled -= instance.OnGameEnter;
         }
 
         public void RemoveCallbacks(IMenuActions instance)
@@ -605,5 +634,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnOptions(InputAction.CallbackContext context);
         void OnCredits(InputAction.CallbackContext context);
         void OnTutorial(InputAction.CallbackContext context);
+        void OnGameEnter(InputAction.CallbackContext context);
     }
 }

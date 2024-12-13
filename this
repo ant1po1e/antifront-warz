@@ -1,0 +1,65 @@
+[33mcommit 6081e9c27caeaf9e577357588609a34225b18633[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Thu Dec 12 09:09:28 2024 +0700
+
+    added icons
+
+[33mcommit aa992a560c3538765d3ad24d59c85a65e18fbd4d[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Wed Dec 11 08:48:55 2024 +0700
+
+    added bgm and sfx
+
+[33mcommit dfa45206ff4216e5e769734ac6fdb4d3126fc076[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Tue Dec 10 08:34:58 2024 +0700
+
+    added credit panel
+
+[33mcommit 74ccd5d2abf14113bdebff988d1b850cf994ef1b[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Tue Dec 10 08:08:58 2024 +0700
+
+    added credit panel
+
+[33mcommit 6167a49db0484183ab7e734837b6ab9f06e9228f[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Mon Dec 9 10:03:42 2024 +0700
+
+    make color selection explicit so other player can take the same color
+
+[33mcommit 34eee5e211928dbadd6a5ba90edc1947e120ec5b[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Fri Dec 6 09:49:24 2024 +0700
+
+    added transition animation and winner text
+
+[33mcommit 8513b9d9916dfe5b110647c7579beafdf0d8c7b6[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Thu Dec 5 10:59:12 2024 +0700
+
+    added 3 map selections
+
+[33mcommit d386db3d424f863e357ebf85ad51874a3c84ece5[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Wed Dec 4 10:57:18 2024 +0700
+
+    add pause and some bugs
+
+[33mcommit fbc123be522ef2250d2a1c0377a881ce29f73fd0[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Tue Dec 3 10:15:18 2024 +0700
+
+    map select feature
+
+[33mcommit b5cf18d727073eaf06769e216c6877e6562ef2e6[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Mon Dec 2 11:00:34 2024 +0700
+
+    rearranged mainmenu ui
+
+[33mcommit 6f684c8cb1c55b826a05015338b03fc2994c5ead[m
+Author: ant1po1e <symamaxim@gmail.com>
+Date:   Fri Nov 29 10:45:57 2024 +0700
+
+    fix dontdestoryonload destroyed on mainmenu
